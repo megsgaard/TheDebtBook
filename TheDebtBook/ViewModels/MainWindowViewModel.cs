@@ -63,7 +63,7 @@ namespace TheDebtBook.ViewModels
                     if (addWindow.ShowDialog() == true)
                     {
                         Debtors.Add(newDebtor);
-                        //CurrentDebtor = newDebtor;
+                        CurrentDebtor = newDebtor;
                     }
                 }));
             }
