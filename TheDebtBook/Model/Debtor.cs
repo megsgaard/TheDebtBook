@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Prism.Mvvm;
 
 
@@ -52,7 +48,7 @@ namespace TheDebtBook.Model
 
         public Debtor()
         {
-
+            transactions = new List<Transaction>();
         }
 
         public Debtor Clone()

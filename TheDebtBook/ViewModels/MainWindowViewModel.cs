@@ -1,6 +1,5 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
-using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using TheDebtBook.Model;
@@ -18,14 +17,6 @@ namespace TheDebtBook.ViewModels
             CurrentDebtor = null;
         }
 
-        //private ObservableCollection<Debtor> debtors;
-
-        //public ObservableCollection<Debtor> Debtors
-        //{
-        //    get { return debtors; }
-        //    set { SetProperty(ref debtors, value); }
-        //}
-
         private int currentIndex = -1;
         public int CurrentIndex
         {
@@ -36,7 +27,7 @@ namespace TheDebtBook.ViewModels
             }
         }
 
-        private Debtor currentDebtor = null;
+        private Debtor currentDebtor;
 
         public Debtor CurrentDebtor
         {

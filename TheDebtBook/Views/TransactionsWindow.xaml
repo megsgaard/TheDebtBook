@@ -7,10 +7,23 @@
         mc:Ignorable="d"
         Title="TransactionsWindow" Height="400" Width="450">
     <Grid>
-        <Button Content="Add value" HorizontalAlignment="Left" Margin="279,49,0,0" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Close" HorizontalAlignment="Left" Margin="10,335,0,0" VerticalAlignment="Top" Width="248"/>
-        <DataGrid HorizontalAlignment="Left" Height="306" Margin="10,10,0,0" VerticalAlignment="Top" Width="248"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="279,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button Command="{Binding AddValueCommand}"
+                Content="Add value" 
+                HorizontalAlignment="Left" 
+                Margin="279,49,0,0" 
+                VerticalAlignment="Top" 
+                Width="120"/>
+        <Button Content="Close" HorizontalAlignment="Left" Margin="10,335,0,0" VerticalAlignment="Top" Width="248" Click="Button_Click"/>
+        <DataGrid ItemsSource="{Binding Path=Transactions}"
+            HorizontalAlignment="Left" 
+                  Height="306" 
+                  Margin="10,10,0,0" 
+                  VerticalAlignment="Top" 
+                  Width="248"
+                  CanUserAddRows="False" 
+                      CanUserDeleteRows="False" 
+                      IsReadOnly="True"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="279,10,0,0" TextWrapping="Wrap" Text="{Binding Path=Amount}" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>
