@@ -10,13 +10,15 @@ namespace TheDebtBook.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
-        //private ObservableCollection<Debtor> debtors;
         public ObservableCollection<Debtor> Debtors { get; private set; }
 
         public MainWindowViewModel()
         {
             Debtors = new ObservableCollection<Debtor>();
+            CurrentDebtor = null;
         }
+
+        //private ObservableCollection<Debtor> debtors;
 
         //public ObservableCollection<Debtor> Debtors
         //{
@@ -24,7 +26,17 @@ namespace TheDebtBook.ViewModels
         //    set { SetProperty(ref debtors, value); }
         //}
 
-        private Debtor currentDebtor;
+        private int currentIndex = -1;
+        public int CurrentIndex
+        {
+            get { return currentIndex; }
+            set
+            {
+                SetProperty(ref currentIndex, value);
+            }
+        }
+
+        private Debtor currentDebtor = null;
 
         public Debtor CurrentDebtor
         {
@@ -35,12 +47,12 @@ namespace TheDebtBook.ViewModels
             }
         }
 
-        private ICommand _newCommand;
+        private ICommand addNewDebtor;
         public ICommand AddNewDebtor
         {
             get
             {
-                return _newCommand ?? (_newCommand = new DelegateCommand(() =>
+                return addNewDebtor ?? (addNewDebtor = new DelegateCommand(() =>
                 {
                     var newDebtor = new Debtor();
                     var vm = new AddWindowViewModel(newDebtor);
@@ -51,9 +63,36 @@ namespace TheDebtBook.ViewModels
                     if (addWindow.ShowDialog() == true)
                     {
                         Debtors.Add(newDebtor);
-                        CurrentDebtor = newDebtor;
+                        //CurrentDebtor = newDebtor;
                     }
                 }));
+            }
+        }
+
+        private ICommand editTransactions;
+
+        public ICommand EditTransactions
+        {
+            get
+            {
+                return editTransactions ?? (editTransactions = new DelegateCommand(() =>
+                {
+                    var tempDebtor = CurrentDebtor.Clone();
+                    var vm = new TransactionsWindowViewModel(tempDebtor);
+                    TransactionsWindow transactionsWindow = new TransactionsWindow
+                    {
+                        DataContext = vm,
+                        Owner = App.Current.MainWindow
+                    };
+                    if (transactionsWindow.ShowDialog() == true)
+                    {
+                        CurrentDebtor.Transactions = tempDebtor.Transactions;
+                    }
+                },
+                () => {
+                    return CurrentIndex >= 0;
+                }
+                ).ObservesProperty(() => CurrentIndex));
             }
         }
     }

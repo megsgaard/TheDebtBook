@@ -54,5 +54,10 @@ namespace TheDebtBook.Model
         {
 
         }
+
+        public Debtor Clone()
+        {
+            return this.MemberwiseClone() as Debtor;
+        }
     }
 }

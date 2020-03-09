@@ -34,39 +34,18 @@ namespace TheDebtBook.ViewModels
                   .ObservesProperty(() => CurrentDebtor.Balance));
             }
         }
+        
 
+        public Debtor CurrentDebtor { get; set; }
 
-        //private string title;
+        //private Debtor currentDebtor;
 
-        //public string Title
+        //public Debtor CurrentDebtor
         //{
-        //    get { return title; }
+        //    get { return currentDebtor; }
         //    set
         //    {
-        //        SetProperty(ref title, value);
-        //    }
-        //}
-
-        private Debtor currentDebtor;
-
-        public Debtor CurrentDebtor
-        {
-            get { return currentDebtor; }
-            set
-            {
-                SetProperty(ref currentDebtor, value);
-            }
-        }
-
-
-        //public ICommand SaveButtonCommand
-        //{
-        //    get
-        //    {
-        //        return saveButtonCommand ?? (saveButtonCommand = new DelegateCommand(
-        //            SaveButtonExecute, SaveButtonCanExecute)
-        //          .ObservesProperty(() => currentDebtor.Name)
-        //          .ObservesProperty(() => currentDebtor.Balance));
+        //        SetProperty(ref currentDebtor, value);
         //    }
         //}
 
