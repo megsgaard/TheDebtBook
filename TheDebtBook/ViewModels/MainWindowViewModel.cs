@@ -1,7 +1,9 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
 using System.Collections.ObjectModel;
+using System.Windows.Controls;
 using System.Windows.Input;
+using TheDebtBook.Data;
 using TheDebtBook.Model;
 using TheDebtBook.Views;
 
@@ -10,11 +12,24 @@ namespace TheDebtBook.ViewModels
     public class MainWindowViewModel : BindableBase
     {
         public ObservableCollection<Debtor> Debtors { get; private set; }
+        private string fileName = "debtbook.txt";
 
         public MainWindowViewModel()
         {
-            Debtors = new ObservableCollection<Debtor>();
+            
+            FileHandling.ReadFile(fileName, out ObservableCollection<Debtor> tempDebtors);
+            if (tempDebtors != null)
+            {
+                Debtors = tempDebtors;
+            }
+            else
+            {
+                Debtors = new ObservableCollection<Debtor>();
+            }
+
             CurrentDebtor = null;
+
+            
         }
 
         private int currentIndex = -1;
@@ -55,6 +70,7 @@ namespace TheDebtBook.ViewModels
                     {
                         Debtors.Add(newDebtor);
                         CurrentDebtor = newDebtor;
+                        FileHandling.SaveFile(fileName, Debtors);
                     }
                 }));
             }
@@ -78,6 +94,7 @@ namespace TheDebtBook.ViewModels
                     if (transactionsWindow.ShowDialog() == true)
                     {
                         CurrentDebtor.Transactions = tempDebtor.Transactions;
+                        FileHandling.SaveFile(fileName, Debtors);
                     }
                 },
                 () => {
@@ -86,5 +103,6 @@ namespace TheDebtBook.ViewModels
                 ).ObservesProperty(() => CurrentIndex));
             }
         }
+
     }
 }

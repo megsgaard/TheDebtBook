@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TheDebtBook.Data;
+using TheDebtBook.ViewModels;
 
 namespace TheDebtBook.Views
 {
@@ -25,5 +27,12 @@ namespace TheDebtBook.Views
             InitializeComponent();
         }
 
+        private void DataGrid_OnAutoGeneratingColumns(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.PropertyName == "Transactions" )
+            {
+                e.Column = null;
+            }
+        }
     }
 }
