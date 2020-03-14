@@ -94,6 +94,7 @@ namespace TheDebtBook.ViewModels
                     if (transactionsWindow.ShowDialog() == true)
                     {
                         CurrentDebtor.Transactions = tempDebtor.Transactions;
+                        CurrentDebtor.Balance = tempDebtor.Balance;
                         FileHandling.SaveFile(fileName, Debtors);
                     }
                 },

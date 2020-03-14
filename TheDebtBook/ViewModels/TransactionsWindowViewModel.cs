@@ -39,6 +39,7 @@ namespace TheDebtBook.ViewModels
 
             Transactions.Add(transaction);
             CurrentDebtor.Transactions.Add(transaction);
+            CurrentDebtor.Balance += Amount;
         }
     }
 }
